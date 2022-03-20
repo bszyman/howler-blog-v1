@@ -64,7 +64,7 @@ Not a developer and just want to get this up and running?
 Download one of our pre-made zip files, unarchive, upload
 and then configure.
 
-Visit [https://howlblog.com](https://howlblow.com) to find
+Visit [https://howlerblog.com](https://howlerblow.com) to find
 downloads.
 
 ## Building
