@@ -1,0 +1,73 @@
+{% extends "base.phtml" %}
+{% import "macros.phtml" as macros %}
+
+{% block content %}
+{% if user_logged_in %}
+<div>
+    <form action="/following/" method="post">
+        {{ macros.generateCSRFMarkup(csrf_token) }}
+        <input type="hidden" name="action" value="add">
+
+        <div class="microblogPost formSection">
+            <div class="microblogPostHeader">
+                <div class="microblogPostHeaderName">
+                        <span style="font-weight: bold;">
+                            <label for="post_text">Add Friend</label>
+                        </span>
+                </div>
+                <div class="microblogPostHeaderDate">
+                </div>
+            </div>
+
+            <div class="microblogPostContent">
+                <div>
+                    <label for="url">Url</label>
+                    <input type="url" id="url" name="url">
+                </div>
+            </div>
+
+            <div class="action-bar" style="width: 100%;">
+                <div class="action-bar-left"></div>
+                <div class="action-bar-right">
+                    <button type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}
+
+<div class="tileContainer">
+    {% for friend in friends %}
+    <div class="tile">
+        {% if preview_image %}
+        <a href="{{ friend.url }}">
+            <img src="{{ friend.image_file }}" width="250" height="250">
+        </a>
+        {% else %}
+        <a href="{{ friend.url }}">
+            <div class="emptyTile"></div>
+        </a>
+        {% endif %}
+
+        <div class="tileTitle">
+            <a href="{{ friend.url }}">{{ friend.name }}</a>
+        </div>
+
+        {% if user_logged_in %}
+        <div>
+            <form action="/following/" method="post">
+                {{ macros.generateCSRFMarkup(csrf_token) }}
+                <input type="hidden" name="friend_id" value="{{ friend.id }}" />
+                <button type="submit" name="action" value="remove">Remove</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<div id="paginator" class="paginator tilesPaginator">
+    {{ macros.generatePageListing(current_page, num_pages, page_list, "following", "") }}
+</div>
+{% endblock %}

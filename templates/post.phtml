@@ -1,0 +1,77 @@
+{% extends "base.phtml" %}
+{% import "macros.phtml" as macros %}
+
+{% block content %}
+<div class="microblogContainer">
+    {% if not user_logged_in %}
+    <div class="microblogPost">
+        <div class="microblogPostHeader">
+            <div class="microblogPostHeaderName">
+                <span style="font-weight: bold;">{{ post.user_object.full_name }}</span>
+            </div>
+            <div class="microblogPostHeaderDate">
+                <a href="post.php?post_id={{ post.id }}">{{ post.created|date("n/j/Y") }} at {{ post.created|date("g:i a") }}</a>
+            </div>
+        </div>
+
+        <div class="microblogPostContent">
+            <p>{{ post.post_text }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if user_logged_in %}
+    <div class="microblogPost">
+        <form action="post.php?post_id={{ post.id }}" method="post">
+            {{ macros.generateCSRFMarkup(csrf_token) }}
+            <input type="hidden" name="post_id" value="{{ post.id }}" />
+
+            <div class="microblogPostHeader">
+                <div class="microblogPostHeaderName">
+                        <span style="font-weight: bold;">
+                            <label for="post_text">{{ post.user_object.full_name }}</label>
+                        </span>
+                </div>
+                <div class="microblogPostHeaderDate">
+                    <a href="post.php?post_id={{ post.id }}">{{ post.created|date("n/j/Y") }} at {{ post.created|date("g:i a") }}</a>
+                </div>
+            </div>
+
+            <div class="microblogPostContent">
+                <textarea rows="4" style="width: 100%;" name="post_text" id="post_text">{{ post.post_text }}</textarea>
+
+                <div class="checkItem" style="margin-top: 7px;">
+                    {% if post.published %}
+                    <input type="checkbox" name="published" id="published" value="1" checked>
+                    {% else %}
+                    <input type="checkbox" name="published" id="published" value="1">
+                    {% endif %}
+                    <label style="display: inline;" for="published">Published</label>
+                </div>
+
+                <div class="checkItem" style="margin-top: 7px;">
+                    {% if post.public %}
+                    <input type="checkbox" name="public" id="public" value="1" checked>
+                    {% else %}
+                    <input type="checkbox" name="public" id="public" value="1">
+                    {% endif %}
+                    <label style="display: inline;" for="public">Show in Feed</label>
+                </div>
+            </div>
+
+            <div class="action-bar" style="width: 100%;">
+                <div class="action-bar-left">
+                    {% if post.wasEdited %}
+                    Edited: {{ post.updated|date("n/j/Y") }} at {{ post.updated|date("g:i a") }}
+                    {% endif %}
+                </div>
+                <div class="action-bar-right">
+                    <button type="submit" name="action" value="delete">Delete</button>
+                    <button type="submit" name="action" value="update">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ site_config.site_name }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/static/styles/article.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/base.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/brochure.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/microblog.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/navigation.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/tiles.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/action_bar.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/forms.css" type="text/css">
+    <link rel="stylesheet" href="/static/styles/paginator.css" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <meta property="og:title" content="{{ site_config.bio_name }}'s Microblog">
+    <meta property="og:site_name" content="{{ site_config.site_title }}">
+    <meta property="og:url" content="{{ site_config.url }}">
+    <meta property="og:description" content="See {{ site_config.bio_name }}'s thoughts and travels across the internet.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ site_config.bio_image }}">
+
+    {% if site.allows_rss_feed %}
+    <link href="rss.php" rel="alternate" type="application/rss+xml" title="RSS Feed" />
+    {% endif %}
+
+    {% if site.allow_atom_feed %}
+    <link href="atom.php" type="application/atom+xml" rel="alternate" title="Atom Feed" />
+    {% endif %}
+</head>
+<body>
+<div class="contentContainer">
+    <div class="navigationSideBar">
+        <div class="navigationTitleGroup">
+            <img src="{{ site_config.profile_pic }}" alt="profile picture" width="250" height="250">
+            <p class="navigationTitleGroupSiteTitle">{{ site_config.bio_name }}</p>
+            <p class="navigationTitleGroupDescription">
+                {{ site_config.bio }}
+            </p>
+            <p class="navigationTitleGroupDescription navigationBioLocation">{{ site_config.location }}</p>
+        </div>
+
+        <div class="navigationGroup">
+            <p class="navigationGroupTitle">Navigation</p>
+            <ul>
+                {% if user_logged_in %}
+                <li><a href="/" class="{{ feed_nav_selected }}">Feed</a></li>
+                {% else %}
+                    {% if site_config.include_feed %}
+                    <li><a href="/" class="{{ feed_nav_selected }}">Feed</a></li>
+                    {% endif %}
+                {% endif %}
+
+                {% if user_logged_in %}
+                <li><a href="/bookmarks/" class="{{ bookmarks_nav_selected }}">Bookmarks</a></li>
+                {% else %}
+                    {% if site_config.include_bookmarks %}
+                    <li><a href="/bookmarks/" class="{{ bookmarks_nav_selected }}">Bookmarks</a></li>
+                    {% endif %}
+                {% endif %}
+
+                {% if user_logged_in %}
+                <li><a href="/following/" class="{{ following_nav_selected }}">Following</a></li>
+                {% else %}
+                    {% if site_config.include_following %}
+                    <li><a href="/following/" class="{{ following_nav_selected }}">Following</a></li>
+                    {% endif %}
+                {% endif %}
+
+
+                {% if user_logged_in %}
+                <li><a href="/settings/" class="{{ settings_nav_selected }}">Settings</a></li>
+                <li><a href="/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/login/">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="navigationGroup">
+            <p class="navigationGroupTitle">Socials</p>
+            <ul>
+                {% if site_config.social_flickr %}
+                <li><a href="{{ site_config.social_flickr }}" target="_blank" rel="noopener">Flickr</a></li>
+                {% endif %}
+
+                {% if site_config.social_instagram %}
+                <li><a href="{{ site_config.social_instagram }}" target="_blank" rel="noopener">Instagram</a></li>
+                {% endif %}
+
+                {% if site_config.social_soundcloud %}
+                <li><a href="{{ site_config.social_soundcloud }}" target="_blank" rel="noopener">SoundCloud</a></li>
+                {% endif %}
+
+                {% if site_config.social_unsplash %}
+                <li><a href="{{ site_config.social_unsplash }}" target="_blank" rel="noopener">Unsplash</a></li>
+                {% endif %}
+
+                {% if site_config.social_vimeo %}
+                <li><a href="{{ site_config.social_vimeo }}" target="_blank" rel="noopener">Vimeo</a></li>
+                {% endif %}
+
+                {% if site_config.social_website %}
+                <li><a href="{{ site_config.social_website }}" target="_blank" rel="noopener">Website</a></li>
+                {% endif %}
+
+                {% if site_config.social_youtube %}
+                <li><a href="{{ site_config.social_youtube }}" target="_blank" rel="noopener">YouTube</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="navigationGroup">
+            <ul>
+                <li><a href="https://howlerblog.com" target="_blank" rel="noopener">This blog by Howler</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="contentSection">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

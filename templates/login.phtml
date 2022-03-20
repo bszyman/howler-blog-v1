@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Howler Login</title>
+	<link href="/static/styles/auth.css" rel="stylesheet" type="text/css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+	<form  method="post" action="/login/">
+		<input type="hidden" name="action" value="tryLogin">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+		<div class="login-form">
+			<div>
+
+			</div>
+			<div class="form-elements">
+				<div class="form-row">
+					<input type="text" 
+							id="username" 
+							name="username" 
+							placeholder="username" 
+							autocomplete="off"
+							autofocus 
+							required>
+				</div>
+				<div class="form-row">
+					<input type="password" 
+							id="password" 
+							name="password" 
+							placeholder="password" 
+							required>
+							
+					<button type="submit" class="login-button">Login</button>
+				</div>
+			</div>
+			<div class="invalid-login">
+				{% if form_errors.incorrect_login %}
+				Invalid username and/or password.
+				{% endif %}
+			</div>
+		</div>
+		<div class="shader"></div>
+		<div class="footer">
+			<div>
+				<div class="footer-l">
+					<a href="/">&larr; Back</a>
+				</div>
+				<div class="footer-c">
+					<span></span>
+				</div>
+				<div class="footer-r">
+					<span></span>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

@@ -1,0 +1,15 @@
+RewriteEngine On
+
+RewriteRule ^logout/?$ /logout.php
+RewriteRule ^login/?$ /login.php
+RewriteRule ^post/(.+)$ /post.php?post_id=$1 [QSA]
+RewriteRule ^rss/?$ /rss.php
+RewriteRule ^atom/?$ /atom.php
+RewriteRule ^json-feed/?$ /json_feed.php
+RewriteRule ^initialize/?$ /initialize.php
+RewriteRule ^settings/?$ /settings.php
+RewriteRule ^bookmark/(.+)$ /bookmark.php?id=$1 [QSA]
+RewriteRule ^bookmarks/?$ /bookmarks.php
+RewriteRule ^following/?$ /following.php
+RewriteRule ^/$ /index.php
+

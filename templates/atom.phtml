@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>{{ feed_title }}</title>
+    <subtitle>{{ feed_description }}</subtitle>
+    <link href="{{ site.url }}/atom.php" rel="self" />
+    <link href="{{ site.url }}" />
+
+    {% for post in posts %}
+    <entry>
+        <title>{{ post.summary }}</title>
+        <link href="{{ site.url }}/post.php?post_id={{ post.id }}" />
+        <id>{{ post.id }}</id>
+        <published>{{ post.getDateCreatedAsIso }}</published>
+        <updated>{{ post.getDateUpdatedAsIso }}</updated>
+        <summary>{{ post.summary }}</summary>
+        <content type="xhtml">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                <p>{{ post.post_text }}</p>
+            </div>
+        </content>
+        <author>
+            <name>{{ post.user_object.full_name }}</name>
+        </author>
+    </entry>
+    {% endfor %}
+</feed>

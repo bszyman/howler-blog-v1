@@ -1,0 +1,9 @@
+.idea
+app_settings.ini
+vendor
+images/bookmarks/*.jpg
+images/bookmarks/*.png
+images/friends/*.jpg
+images/friends/*.png
+images/posts/*.jpg
+images/posts/*.png

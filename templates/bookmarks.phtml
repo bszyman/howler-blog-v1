@@ -1,0 +1,69 @@
+{% extends "base.phtml" %}
+{% import "macros.phtml" as macros %}
+
+{% block content %}
+{% if user_logged_in %}
+<div>
+    <form action="/bookmarks/" method="post">
+        {{ macros.generateCSRFMarkup(csrf_token) }}
+        <input type="hidden" name="action" value="saveBookmark">
+
+        <div class="microblogPost formSection">
+            <div class="microblogPostHeader">
+                <div class="microblogPostHeaderName">
+                        <span style="font-weight: bold;">
+                            <label for="post_text">Add Bookmark</label>
+                        </span>
+                </div>
+                <div class="microblogPostHeaderDate">
+                </div>
+            </div>
+
+            <div class="microblogPostContent">
+                <div>
+                    <label for="url">Url</label>
+                    <input type="url" id="url" name="url">
+                </div>
+
+                <div class="checkItem" style="margin-top: 7px;">
+                    <input type="checkbox" name="public" id="public" value="1" checked>
+                    <label style="display: inline;" for="public">Show in Feed</label>
+                </div>
+            </div>
+
+            <div class="action-bar" style="width: 100%;">
+                <div class="action-bar-left"></div>
+                <div class="action-bar-right">
+                    <button type="submit">Add</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}
+
+<div class="brochurePageContent">
+    {% for bookmark in bookmarks %}
+    <div class="brochurePageSplitLeft">
+        <div>
+            {% if bookmark.image_file %}
+            <div class="brochureSplitImage" style="background-image: url('{{ bookmark.image_file }}');"></div>
+            {% else %}
+            <div class="brochureSplitImage"></div>
+            {% endif %}
+        </div>
+        <div>
+            <a href="{{ bookmark.url }}" target="_blank" rel="noopener">
+                <h2>{{ bookmark.title }}</h2>
+            </a>
+            <p>{{ bookmark.description }}</p>
+            {% if user_logged_in %}<a href="/bookmark/{{ bookmark.id }}/">Edit Bookmark &rarr;</a>{% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div id="paginator" class="paginator microblogPaginator">
+        {{ macros.generatePageListing(current_page, num_pages, page_list, "bookmarks", "") }}
+    </div>
+</div>
+{% endblock %}
