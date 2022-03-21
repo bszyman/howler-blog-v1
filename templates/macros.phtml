@@ -1,29 +1,29 @@
 {% macro generatePageListing(current_page, max_page, pages, view_name, search_text) %}
-	<ul>
-	{% if search_text != "" %}
-		{% set search_text_formatted = "&search_text=" ~ search_text %}
-	{% else %}
-		{% set search_text_formatted = "" %}
-	{% endif %}
-	
-	{% if pages[0] != 1 %}
-		<li><a href="{{ view_name }}.php?page=1{{ search_text_formatted }}">1</a></li>
-		<li><span>...</span></li>
-	{% endif %}
+<ul>
+    {% if search_text != "" %}
+    {% set search_text_formatted = "&search_text=" ~ search_text %}
+    {% else %}
+    {% set search_text_formatted = "" %}
+    {% endif %}
 
-	{% for page in pages %}
-		{% if page == current_page %}
-			<li><span>{{ page }}</span></li>
-		{% else %}
-			<li><a href="{{ view_name }}.php?page={{ page }}{{ search_text_formatted }}">{{ page }}</a></li>
-		{% endif %}
-	{% endfor %}
+    {% if pages[0] != 1 %}
+    <li><a href="{{ view_name }}.php?page=1{{ search_text_formatted }}">1</a></li>
+    <li><span>...</span></li>
+    {% endif %}
 
-	{% if pages | last != max_page %}
-		<li><span>...</span></li>
-		<li><a href="{{ view_name }}.php?page={{ max_page }}{{ search_text_formatted }}">{{ max_page }}</a></li>
-	{% endif %}
-	</ul>
+    {% for page in pages %}
+    {% if page == current_page %}
+    <li><span>{{ page }}</span></li>
+    {% else %}
+    <li><a href="{{ view_name }}.php?page={{ page }}{{ search_text_formatted }}">{{ page }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if pages | last != max_page and pages | last != 1 %}
+    <li><span>...</span></li>
+    <li><a href="{{ view_name }}.php?page={{ max_page }}{{ search_text_formatted }}">{{ max_page }}</a></li>
+    {% endif %}
+</ul>
 {% endmacro %}
 
 {% macro generateCSRFMarkup(csrf_token) %}

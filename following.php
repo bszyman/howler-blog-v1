@@ -32,12 +32,12 @@ class FollowingController extends Controller
         $page_number = parent::getSafePageNumber();
 
         if (parent::userIsLoggedIn()) {
-            $paginated_friends = FriendStore::paginate($page_number, 20);
+            $paginated_friends = FriendStore::paginate($page_number, 21);
             $csrf_token = CSRFProtect::generateToken("following");
         } else {
             if ($this->site->include_following)
             {
-                $paginated_friends = FriendStore::paginate($page_number, 20);
+                $paginated_friends = FriendStore::paginate($page_number, 21);
                 $csrf_token = "";
             } else {
                 http_response_code(404);
@@ -54,7 +54,7 @@ class FollowingController extends Controller
 
         $paginator = new Paginator();
         $paginator->setCurrentPage($page_number);
-        $paginator->setMaxPage($paginated_friends->count);
+        $paginator->setMaxPage(ceil($paginated_friends->count/21));
 
         $page_list = $paginator->getPageRange();
 

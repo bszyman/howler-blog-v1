@@ -14,18 +14,22 @@ class Controller
 	function __construct()
 	{
 		$this->form_errors = new StdClass;
-        $site = SiteStore::fetchActiveConfig();
 
-        if (!SiteStore::checkIfInitialized()) {
-            header("Location: /initialize/");
-        }
+        if (static::class !== "InitializationController")
+        {
+            if (!SiteStore::checkIfInitialized()) {
+                header("Location: /initialize/");
+            }
 
-        if (!$site) {
-            error_log(get_class() .  "@" . __FUNCTION__ . ": " . "Couldn't load site config.", 0);
-            http_response_code(500);
-            exit;
-        } else {
-            $this->site = $site;
+            $site = SiteStore::fetchActiveConfig();
+
+            if (!$site) {
+                error_log(get_class() .  "@" . __FUNCTION__ . ": " . "Couldn't load site config.", 0);
+                http_response_code(500);
+                exit;
+            } else {
+                $this->site = $site;
+            }
         }
 	}
 	

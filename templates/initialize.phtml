@@ -23,7 +23,7 @@
         ready for visitors.
     </p>
 
-    <form action="/initialization.php" method="post">
+    <form action="/initialize/" method="post">
         {{ macros.generateCSRFMarkup(csrf_token) }}
         <input type="hidden" name="action" value="initialize">
 

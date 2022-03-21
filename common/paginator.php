@@ -12,11 +12,15 @@ class Paginator {
 	}
 	
 	public function setCurrentPage(int $page_number): void {
-		$this->current_page = $page_number;
+        if ($page_number > 0) {
+            $this->current_page = $page_number;
+        }
 	} 
 	
 	public function setMaxPage(int $page_number): void {
-		$this->max_page = $page_number;
+        if ($page_number > 0) {
+            $this->max_page = $page_number;
+        }
 	}
 	
 	// Returns an array of numbers (n), from n = current_page to max_page

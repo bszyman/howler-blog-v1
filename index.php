@@ -52,7 +52,7 @@ class IndexController extends Controller
 
         $paginator = new Paginator();
         $paginator->setCurrentPage($page_number);
-        $paginator->setMaxPage($paginated_posts->count);
+        $paginator->setMaxPage(ceil($paginated_posts->count/20));
 
         $page_list = $paginator->getPageRange();
 
