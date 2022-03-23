@@ -126,7 +126,7 @@ class SiteStore extends Store
                     $site->social_bitbucket = $db_record->social_bitbucket;
                     $site->social_github = $db_record->social_github;
 
-                    $ini_conf = parse_ini_file("app_settings.ini", true);
+                    $ini_conf = parse_ini_file("common/app_settings.ini", true);
                     $site_config = $ini_conf["site_config"];
                     $site->site_url = $site_config["web_address"];
                 }

@@ -28,11 +28,11 @@
     <meta property="og:image" content="{{ site_config.bio_image }}">
 
     {% if site_config.allow_rss_feed %}
-    <link href="/rss/" rel="alternate" type="application/rss+xml" title="RSS Feed" />
+    <link href="{{ site_config.site_url }}/rss/" rel="alternate" type="application/rss+xml" title="RSS Feed" />
     {% endif %}
 
     {% if site_config.allow_atom_feed %}
-    <link href="/atom" type="application/atom+xml" rel="alternate" title="Atom Feed" />
+    <link href="{{ site_config.site_url }}/atom/" type="application/atom+xml" rel="alternate" title="Atom Feed" />
     {% endif %}
 </head>
 <body>
