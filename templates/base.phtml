@@ -27,12 +27,12 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="{{ site_config.bio_image }}">
 
-    {% if site_config.allows_rss_feed %}
-    <link href="rss.php" rel="alternate" type="application/rss+xml" title="RSS Feed" />
+    {% if site_config.allow_rss_feed %}
+    <link href="/rss/" rel="alternate" type="application/rss+xml" title="RSS Feed" />
     {% endif %}
 
     {% if site_config.allow_atom_feed %}
-    <link href="atom.php" type="application/atom+xml" rel="alternate" title="Atom Feed" />
+    <link href="/atom" type="application/atom+xml" rel="alternate" title="Atom Feed" />
     {% endif %}
 </head>
 <body>

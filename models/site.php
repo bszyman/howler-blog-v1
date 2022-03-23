@@ -5,6 +5,7 @@ include_once "common/store.php";
 
 class Site extends Model
 {
+    public string $site_url;
     public string $site_name;
     public string $profile_pic;
     public string $bio_name;
@@ -29,6 +30,7 @@ class Site extends Model
     {
         parent::__construct();
 
+        $this->site_url = "";
         $this->site_name = "";
         $this->profile_pic = "/images/profile-pic.jpg";
         $this->bio_name = "";
@@ -123,6 +125,10 @@ class SiteStore extends Store
                     $site->profile_pic = $db_record->profile_pic;
                     $site->social_bitbucket = $db_record->social_bitbucket;
                     $site->social_github = $db_record->social_github;
+
+                    $ini_conf = parse_ini_file("app_settings.ini", true);
+                    $site_config = $ini_conf["site_config"];
+                    $site->site_url = $site_config["web_address"];
                 }
             }
 
