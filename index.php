@@ -73,7 +73,7 @@ class IndexController extends Controller
 
     function createPost(): void
     {
-        if (parent::userIsLoggedIn()) {
+        if (!parent::userIsLoggedIn()) {
             parent::redirectToLogin();
         } else {
             $csrf_key = CSRFProtect::getTokenKeyForPageNamed("blog_index");
