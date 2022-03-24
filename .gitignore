@@ -1,6 +1,7 @@
 .idea
 app_settings.ini
 vendor
+images/*.jpg
 images/bookmarks/*.jpg
 images/bookmarks/*.png
 images/friends/*.jpg

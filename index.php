@@ -29,7 +29,7 @@ class IndexController extends Controller
     {
         $page_number = parent::getSafePageNumber();
 
-        if (!parent::userIsLoggedIn()) {
+        if (parent::userIsLoggedIn()) {
             $paginated_posts = PostStore::paginate($page_number, 20, true);
             $csrf_token = CSRFProtect::generateToken("blog_index");
         } else {
