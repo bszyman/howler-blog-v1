@@ -54,7 +54,7 @@ class FollowingController extends Controller
 
         $paginator = new Paginator();
         $paginator->setCurrentPage($page_number);
-        $paginator->setMaxPage(ceil($paginated_friends->count/21));
+        $paginator->setMaxPage($paginated_friends->count);
 
         $page_list = $paginator->getPageRange();
 

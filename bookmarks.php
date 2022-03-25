@@ -52,7 +52,7 @@ class BookmarksController extends Controller
 
         $paginator = new Paginator();
         $paginator->setCurrentPage($page_number);
-        $paginator->setMaxPage(ceil($paginated_bookmarks->count/20));
+        $paginator->setMaxPage($paginated_bookmarks->count);
 
         $page_list = $paginator->getPageRange();
 
