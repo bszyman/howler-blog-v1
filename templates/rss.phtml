@@ -2,18 +2,19 @@
 <rss version="2.0">
     <channel>
         <title>{{ feed_title }}</title>
-        <link>{{ site.url }}</link>
+        <link>{{ site_config.site_url }}</link>
         <description>{{ feed_description }}</description>
         <language>en-us</language>
 
         {% for post in posts %}
         <item>
             <title>{{ post.summary }}</title>
-            <link>{{ site.url }}/post.php?post_id={{ post.id }}</link>
+            <link>{{ site_config.site_url }}/post/{{ post.id }}</link>
             <description>
                 {{ post.post_text }}
                 {% if post.wasEdited %}Updated on {{ post.getDateUpdatedFormatted }}.{% endif %}
             </description>
+            <pubDate>{{ post.getDateCreatedAs2822 }}</pubDate>
         </item>
         {% endfor %}
     </channel>

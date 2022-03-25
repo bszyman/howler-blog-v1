@@ -38,6 +38,8 @@ class Post extends Model
             return $this->post_text;
         }
     }
+
+    public function getDateCreatedAs2822(): string { return $this->created->format(DateTime::RFC2822); }
 }
 
 class PostStore extends Store
