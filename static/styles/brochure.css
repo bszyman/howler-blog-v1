@@ -61,7 +61,7 @@
     min-height: 200px;
     max-height: 320px;
     border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(21, 21, 21, 0.5);
+    box-shadow: 0 4px 8px hsl(0deg 0% 8% / 12%), 0 16px 34px hsl(0deg 0% 8% / 25%);
     margin: 15px auto 0 auto;
     background-color: rgb(247, 247, 247);
     background-position: center center;

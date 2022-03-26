@@ -34,7 +34,7 @@
 }
 
 .tile img:hover {
-    box-shadow: 0 2px 8px rgba(21, 21, 21, 0.5);
+    box-shadow: 0 4px 8px hsl(0deg 0% 8% / 12%), 0 16px 34px hsl(0deg 0% 8% / 25%);
 }
 
 .tileTitle a {
@@ -54,7 +54,7 @@
 }
 
 .emptyTile:hover {
-    box-shadow: 0 2px 8px rgba(21, 21, 21, 0.5);
+    box-shadow: 0 4px 8px hsl(0deg 0% 8% / 12%), 0 16px 34px hsl(0deg 0% 8% / 25%);
 }
 
 @media only screen and (max-width: 600px) {
