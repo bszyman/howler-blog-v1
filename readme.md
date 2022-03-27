@@ -4,8 +4,9 @@
 
 ## About This Project
 
-HowlerBlog is a free, open-source microblogging web application,
-designed to run on any standard ~LAMP server.
+[HowlerBlog](https://howlerblow.com) is a free, open-source 
+microblogging web application, designed to run on any standard 
+~LAMP server.
 
 It is built using very few dependencies, and is intentionally
 framework and JavaScript-free, making this application highly 
@@ -61,11 +62,9 @@ but was built against PHP 8.1.
 
 Not a developer and just want to get this up and running?
 
-Download one of our pre-made zip files, unarchive, upload
-and then configure.
-
-Visit [https://howlerblog.com](https://howlerblow.com) to find
-downloads.
+Download one of our pre-made zip files made available in the 
+[Releases](https://github.com/bszyman/howler-blog/releases) section, 
+unarchive, upload and then configure.
 
 ## Building
 
