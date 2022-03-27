@@ -13,3 +13,8 @@ RewriteRule ^bookmarks/?$ /bookmarks.php
 RewriteRule ^following/?$ /following.php
 RewriteRule ^/$ /index.php
 
+<FilesMatch "\.(?:ini)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
