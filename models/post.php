@@ -314,7 +314,7 @@ class PostStore extends Store
     {
         $dbh = parent::dataSource();
 
-        $list = new ArrayObject();
+        $list = array();
         $page -= 1;
         $page = $page * $page_size;
 
@@ -352,8 +352,8 @@ class PostStore extends Store
                 $post->quote_contents = $db_record->quote_contents;
                 $post->published = $db_record->published;
                 $post->public = $db_record->public;
-
-                $list->append($post);
+                array_push($list, $post);
+                //$list->append($post);
             }
 
             $sql = $dbh->prepare("SELECT COUNT(id) as total_count FROM posts WHERE public = 1 AND published = 1");
