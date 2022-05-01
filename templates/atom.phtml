@@ -14,11 +14,7 @@
         <published>{{ post.getDateCreatedAsIso }}</published>
         <updated>{{ post.getDateUpdatedAsIso }}</updated>
         <summary>{{ post.summary }}</summary>
-        <content type="xhtml">
-            <div xmlns="http://www.w3.org/1999/xhtml">
-                <p>{{ post.post_text }}</p>
-            </div>
-        </content>
+        <content type="xhtml">{{ post.post_text }}</content>
         <author>
             <name>{{ post.user_object.full_name }}</name>
         </author>

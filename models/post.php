@@ -383,6 +383,69 @@ class PostStore extends Store
 
         return $payload;
     }
+
+    public static function paginateForFeed2(int $page, int $page_size): ?StdClass
+    {
+        $dbh = parent::dataSource();
+
+        $list = array();
+        $page -= 1;
+        $page = $page * $page_size;
+
+        try {
+            $sql = $dbh->prepare("SELECT id,
+										UNIX_TIMESTAMP(created) as created_f,
+										UNIX_TIMESTAMP(updated) as updated_f,
+										post_text, user, in_reply_to, quote_from, quote_contents,
+                                           published, public
+									FROM posts
+                                    WHERE public = 1
+                                        AND published = 1
+									ORDER BY created DESC
+									LIMIT $page, $page_size");
+
+            $db_result = $sql->execute();
+
+            while ($db_record = $sql->fetchObject()) {
+                $user = UserStore::fetchWithID($db_record->user);
+                $slimmed_user = new StdClass;
+                if ($user) {
+                    $slimmed_user->name = $user->full_name;
+                }
+
+                $post = new StdClass;
+                $post->id = $db_record->id;
+                $post->postText = $db_record->post_text;
+                array_push($list, $post);
+            }
+
+            $sql = $dbh->prepare("SELECT COUNT(id) as total_count FROM posts WHERE public = 1 AND published = 1");
+
+            $db_result = $sql->execute();
+            $total_count = $sql->fetchObject()->total_count;
+
+            if ($db_result) {
+                $has_next = (($page+1) * $page_size) < $total_count;
+                $has_previous = ((($page+1) * $page_size) - $page_size) > 0;
+            } else {
+                $has_next = false;
+                $has_previous = false;
+            }
+
+            $dbh = null;
+
+        } catch (Exception $e) {
+            error_log(get_class() .  "@" . __FUNCTION__ . ": " . $e->getMessage(), 0);
+            return null;
+        }
+
+        $payload = new StdClass;
+        $payload->posts = $list;
+        $payload->hasNext = $has_next;
+        $payload->hasPrevious = $has_previous;
+
+        return $payload;
+    }
 }
 
 
