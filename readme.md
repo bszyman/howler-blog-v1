@@ -2,6 +2,14 @@
 
 > Your very own microblog.
 
+## Important Update!
+
+I have rebuilt Howler on top of Laravel, just for better robustness,
+to not look like a scrub on the platform of the world wide internet,
+and because it was a good excuse to learn Larave.
+
+Newer version: https://github.com/bszyman/howler-blog
+
 ## About This Project
 
 [HowlerBlog](https://howlerblow.com) is a free, open-source 
